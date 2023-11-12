@@ -6,6 +6,8 @@ on:
       - opened
       - reopened
       - synchronize
+    branches:
+      - development
 
 concurrency:
   group: preview-${{ github.ref }}
@@ -22,8 +24,7 @@ jobs:
       - name: Build 🏗️
         uses: ./.github/actions/build
         env:
-          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-          TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+          VITE_APP_ENV: staging
 
       - name: Upload build files 📤
         uses: sliit-foss/actions/preview-deployments/postbuild@main
